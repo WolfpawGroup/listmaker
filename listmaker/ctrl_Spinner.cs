@@ -135,4 +135,114 @@ namespace listmaker
 		NUMERIC,
 		ALPHANUMERIC
 	}
+
+	public class spinnerArray
+	{
+		private int _pointer = 0;
+		private List<ctrl_Spinner> _spinners = new List<ctrl_Spinner>();
+
+		public List<ctrl_Spinner> ToList()
+		{
+			return _spinners;
+		}
+
+		public ctrl_Spinner[] ToArray()
+		{
+			return _spinners.ToArray();
+		}
+
+		public void Add(ctrl_Spinner spinner)
+		{
+			_spinners.Add(spinner);
+		}
+
+		public void AddRange(List<ctrl_Spinner> spinners)
+		{
+			foreach (var spinner in spinners)
+			{
+				_spinners.Add(spinner);
+			}
+		}
+
+		public void AddRange(ctrl_Spinner[] spinners)
+		{
+			foreach (var spinner in spinners)
+			{
+				_spinners.Add(spinner);
+			}
+		}
+
+		public string getValue()
+		{
+			StringBuilder sb = new StringBuilder();
+
+			foreach (var spinner in _spinners) { sb.Append(spinner.getString()); }
+
+			return sb.ToString();
+		}
+
+		public char getChar(int index)
+		{
+			if (_spinners.Count <= index)
+			{
+				return '0';
+			}
+			else
+			{
+				return _spinners[index].getChar();
+			}
+		}
+
+		public char[] getChars()
+		{
+			char[] sb = new char[_spinners.Count];
+
+			for (int i = 0; i < sb.Length; i++)
+			{
+				sb[i] = _spinners[i].getChar();
+			}
+
+			return sb;
+		}
+
+		public byte getByte(int index)
+		{
+			if (_spinners.Count <= index)
+			{
+				return 0;
+			}
+			else
+			{
+				return (byte)_spinners[index].getChar();
+			}
+		}
+
+		public byte[] getBytes()
+		{
+			byte[] sb = new byte[_spinners.Count];
+
+			for (int i = 0; i < sb.Length; i++)
+			{
+				sb[i] = (byte)_spinners[i].getChar();
+			}
+
+			return sb;
+		}
+
+		public int pointerPosition()
+		{
+			return _pointer;
+		}
+
+		public void resetPointer()
+		{
+			_pointer = 0;
+		}
+
+		public void setPointer(int index)
+		{
+			if(index >= _spinners.Count)
+			_pointer = index;
+		}
+	}
 }
